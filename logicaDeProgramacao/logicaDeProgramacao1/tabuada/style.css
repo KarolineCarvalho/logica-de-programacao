@@ -1,0 +1,13 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+}
+
+.container {
+	width: 80%;
+	margin: 30px auto;
+}
+
+.tabuada-container {
+	margin: 0 5% 0 5%;
+}

@@ -1,0 +1,29 @@
+<meta charset="UTF-8">
+
+<h1>Jogo de Adivinhação</h1>
+<h2>Chute um número de 0 a 10!</h2>
+
+<input/>
+<button>Compare</button>
+
+
+<script>
+	var segredo = Math.round(Math.random() * 10);
+	
+	var input = document.querySelector("input");
+        input.focus();
+
+	function verifica(){
+	if(input.value == segredo){
+
+		alert("Você ACERTOU!")
+	} else{
+		alert("Você ERROU!")
+	}
+	input.value = "";
+	input.focus();
+}
+
+var button = document.querySelector("button");
+button.onclick = verifica;
+</script>
