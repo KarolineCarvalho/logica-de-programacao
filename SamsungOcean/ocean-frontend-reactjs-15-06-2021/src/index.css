@@ -18,6 +18,11 @@ body {
   box-shadow: 0 1px 6px rgb(32 33 36/ 28%);
 }
 
+.card_item img {
+  height: 250px;
+  width: auto;
+}
+
 img {
   border-radius: 10px;
 }

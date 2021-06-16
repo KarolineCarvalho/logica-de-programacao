@@ -5,20 +5,51 @@ import "./index.css";
 function CardItem(props) {
   return (
     <div className="card_item">
-      <h2>{props.nome}</h2>
-      <img src={props.imagem} alt={props.nome} width="300" height="auto" />
+      <h2>{props.item.nome}</h2>
+      <img src={props.item.imagem} alt={props.item.nome} width="300" />
     </div>
   );
 }
 
-function ListItems() {
-  return (
-    <div className="lista_itens">
-      <CardItem nome="Gumball" imagem="src\imagens\gumball.jpg" />
-      <CardItem nome="Darwin" imagem="src\imagens\darwin.png" />
-      <CardItem nome="Ricardo" imagem="src\imagens\ricardo.png" />
-    </div>
-  );
+class ListItems extends React.Component {
+  // 1- Definir estado incial
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      itens: [],
+    };
+  }
+
+  async componentDidMount() {
+    console.log("Componente ListarItens construído.");
+
+    const request = await fetch("https://backend-flexivel.herokuapp.com/", {
+      headers: new Headers({
+        Authorization: "cakarol",
+      }),
+    });
+
+    const json = await request.json();
+
+    // 2- Atualiza o estado
+    this.setState({
+      itens: json,
+    });
+
+    console.log(json);
+  }
+
+  render() {
+    // 3- Renderiza utilizando a informação que está no estado
+    return (
+      <div className="lista_itens">
+        {this.state.itens.map((item, index) => (
+          <CardItem item={item} key={index} />
+        ))}
+      </div>
+    );
+  }
 }
 
 function App() {
