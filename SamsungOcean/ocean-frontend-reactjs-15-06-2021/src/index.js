@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./index.css";
 
 function CardItem(props) {
@@ -22,8 +23,6 @@ class ListItems extends React.Component {
   }
 
   async componentDidMount() {
-    console.log("Componente ListarItens construído.");
-
     const request = await fetch("https://backend-flexivel.herokuapp.com/", {
       headers: new Headers({
         Authorization: "cakarol",
@@ -36,8 +35,6 @@ class ListItems extends React.Component {
     this.setState({
       itens: json,
     });
-
-    console.log(json);
   }
 
   render() {
@@ -52,13 +49,27 @@ class ListItems extends React.Component {
   }
 }
 
+class VisualizarItem extends React.Component {
+  render() {
+    return <div>Visualizar apenas um item</div>;
+  }
+}
+
 function App() {
-  return <ListItems />;
+  return (
+    <Switch>
+      <Route path="/" exact={true} component={ListItems} />
+      <Route path="/visualizar/:id" component={VisualizarItem} />
+      <ListItems />;
+    </Switch>
+  );
 }
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );
